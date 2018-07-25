@@ -1,0 +1,2 @@
+# ListViewDynamicLoading
+在ListView中实现数据动态加载，仿照微信滑动加载数据，不断的根据用户的操作加载相关的数据，解决网络请求数据慢的问题，分批加载数据，在listview中展示。
