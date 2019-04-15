@@ -1,15 +1,18 @@
-package com.example.frank.listviewloading;
+package com.example.frank.dynamicloading;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.DragEvent;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,11 +20,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class ListViewActivity extends AppCompatActivity {
 
     private ListView listView;
     private MyAdapter myAdapter;
-    private static String TAG="MainActivity";
+    private static String TAG="ListViewActivity";
     private int i=0;
     private int firstVisibleItemTag=0;
 
@@ -38,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setAdapter(myAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(new Intent(ListViewActivity.this,GridViewActivity.class));
+            }
+        });
 
         /*listView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -151,5 +160,25 @@ public class MainActivity extends AppCompatActivity {
 
     public final class ViewHolder{
         public TextView title;
+    }
+
+
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK )
+        {
+            new AlertDialog.Builder(ListViewActivity.this).setTitle("您是否要退出系统")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    }).setNegativeButton("取消",null)
+                    .show();
+        }
+        return false;
     }
 }

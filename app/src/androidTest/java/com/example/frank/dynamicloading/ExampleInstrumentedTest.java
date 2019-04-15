@@ -1,4 +1,4 @@
-package com.example.frank.listviewloading;
+package com.example.frank.dynamicloading;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
